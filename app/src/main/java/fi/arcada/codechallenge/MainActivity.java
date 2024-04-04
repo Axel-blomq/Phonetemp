@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                double[] numbers = {0.2, 0.3, 3.5};
+                double[] numbers = {0.2, 0.3, 3.5, 4, 6, 7, 8};
                 ArrayList<Double> numbersA = new ArrayList<>();
 
                 for (double value : numbers){
@@ -68,9 +68,7 @@ public class MainActivity extends AppCompatActivity {
             if(length % 2 == 0){
                 //is even, return mid of 2 values, sub two due to indexes.
                 int i = (int) (length/2 - 2);
-
                 return ((sorted.get(i)+sorted.get(i+1))/2);
-
             }
             else{
                 //number is odd, so no problems, round down to pick one value, minus one due to index
@@ -88,6 +86,50 @@ public class MainActivity extends AppCompatActivity {
             }
             return sum/length;
         }
+
+        public static Double calcLQ(ArrayList<Double> values){
+
+            double length = values.size();
+            ArrayList<Double> sorted = new ArrayList<>(values);
+            Collections.sort(sorted);
+            //find the length of a "segment", round down to deal with odd numbers
+            int segment = (int) Math.floor(length/4);
+
+            int halfSegment = segment / 2;
+
+            //half that and grab the number on that index... -1 due to index at 0?
+
+            return sorted.get(halfSegment - 1);
+        }
+        public static Double calcHQ(ArrayList<Double> values){
+
+            double length = values.size();
+            ArrayList<Double> sorted = new ArrayList<>(values);
+            Collections.sort(sorted);
+            //find the length of a "segment", round down to deal with odd numbers
+            int segment = (int) Math.floor(length/4);
+
+            int halfSegment = segment / 2;
+
+            //half that and grab the number on that index... -1 due to index at 0?
+
+            return sorted.get(segment * 3 + halfSegment - 1);
+
+        }
+        public static Double calcTQR(ArrayList<Double> values){
+
+            double length = values.size();
+            ArrayList<Double> sorted = new ArrayList<>(values);
+            Collections.sort(sorted);
+            //find the length of a "segment", round down to deal with odd numbers
+            int segment = (int) Math.floor(length/4);
+
+
+            //funny thing when grabbing the median in 2 sectors... its the end of the first/start of the second
+
+            return sorted.get(segment * 2 - 1);
+        }
+
     }
 
 }
