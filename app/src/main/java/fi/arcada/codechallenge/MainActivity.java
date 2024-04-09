@@ -1,6 +1,8 @@
 package fi.arcada.codechallenge;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,12 +26,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         answer = findViewById(R.id.AwnsText);
 
+        double[] numbers = {0.2, 0.3, 3.5, 4, 6, 7, 8};
+
+        //shared preferences
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+        SharedPreferences.Editor prefEditor;
+        prefEditor = prefs.edit();
+
+        int viewCount = prefs.getInt("num1", 0);
+        viewCount++;
+        prefEditor.putInt("num1", viewCount);
+
+        prefEditor.apply();
+        //end shared pref
+
         butt = (Button) findViewById(R.id.button);
         butt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                double[] numbers = {0.2, 0.3, 3.5, 4, 6, 7, 8};
+
+
                 ArrayList<Double> numbersA = new ArrayList<>();
 
                 for (double value : numbers){
